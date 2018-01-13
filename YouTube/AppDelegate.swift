@@ -8,14 +8,39 @@
 
 import UIKit
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+        
+        //Change the bar color
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        
+        //Get rid of black line underneath navigation Bar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        //Change the status bar text color to white (Change the property "view controller base status bar..." to NO in the 'info.ploist' file
+        application.statusBarStyle = .lightContent
+        
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        
+        
+        
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "V:|[v0(20)]", views: statusBarBackgroundView)
         return true
     }
 
